@@ -1,4 +1,7 @@
+using Gameplay.Management.Core;
+using Gameplay.Management.Inputs;
 using Gameplay.UI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +19,10 @@ namespace Gameplay.Management.UI
 
         #region PROPERTIES
 
+        private InputManager InputManager => InputManager.Instance;
+        private HotkeysInputs HotkeysInputs => InputManager?.HotkeysInputs;
+        private GameplayCoreManager GameplayCoreManager => GameplayCoreManager.Instance;
+
         #endregion
 
         #region METHODS
@@ -26,6 +33,26 @@ namespace Gameplay.Management.UI
             _windows = new List<UIWindowBase>();
 
             OpenWindow(_mainMenu);
+        }
+
+        protected override void AttachEvents()
+        {
+            base.AttachEvents();
+
+            if (HotkeysInputs != null)
+            {
+                HotkeysInputs.OnPauseBackCall += HandlePauseBackCall;
+            }
+        }
+
+        protected override void DetachEvents()
+        {
+            base.DetachEvents();
+
+            if (HotkeysInputs != null)
+            {
+                HotkeysInputs.OnPauseBackCall -= HandlePauseBackCall;
+            }
         }
 
         public void OpenWindow(UIWindowBase window)
@@ -44,7 +71,24 @@ namespace Gameplay.Management.UI
 
             window.CleanUp();
             window.gameObject.SetActive(false);
+
+            if (_windows.Count == 0)
+                GameplayCoreManager.ChangeGameState(GameStateType.GAMEPLAY);
         }
+
+
+        #region HANDLERS
+
+        private void HandlePauseBackCall()
+        {
+            if (_windows.Count != 0)
+                return;
+
+            GameplayCoreManager.Instance.ChangeGameState(GameStateType.PAUSE);
+            OpenWindow(_mainMenu);
+        }
+
+        #endregion
 
         #endregion
     }

@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Gameplay.UI.UIViewBase, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5960794118777384278, guid: 358f1afb44fc9244eba37b8795c9fa83, type: 3}
+      propertyPath: m_text
+      value: Settings
+      objectReference: {fileID: 0}
     - target: {fileID: 7218780235526367854, guid: 358f1afb44fc9244eba37b8795c9fa83, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -313,6 +317,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6727311143149217451}
   m_SourcePrefab: {fileID: 100100000, guid: 358f1afb44fc9244eba37b8795c9fa83, type: 3}
+--- !u!114 &27145984662875952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5233171190256678844, guid: 358f1afb44fc9244eba37b8795c9fa83, type: 3}
+  m_PrefabInstance: {fileID: 5260068409741547660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &8176679775744537941 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4145249781099900377, guid: 358f1afb44fc9244eba37b8795c9fa83, type: 3}
@@ -335,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c6209bad22e274eb79a9425d2de847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.UI.UIViewBase
+  _closeButton: {fileID: 27145984662875952}
 --- !u!1001 &6749416051679695830
 PrefabInstance:
   m_ObjectHideFlags: 0

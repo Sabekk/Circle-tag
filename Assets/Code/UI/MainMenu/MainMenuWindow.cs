@@ -1,3 +1,4 @@
+using Gameplay.Management.Core;
 using System;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Gameplay.UI
         #region VARIABLES
 
         [SerializeField] private UIViewBase _settingsView;
+
 
         #endregion
 
@@ -24,12 +26,13 @@ namespace Gameplay.UI
 
         public void PlayGame()
         {
-
+            GameplayCoreManager.Instance.StartGame();
+            Close();
         }
 
         public void ExitGame()
         {
-
+            Application.Quit();
         }
 
         #endregion

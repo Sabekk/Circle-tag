@@ -54,7 +54,10 @@ public class EnemyWalkBehaviour : MonoBehaviour
 
         foreach (var chasable in _nearbyChasables)
         {
-            if (chasable == null) 
+            if (chasable == null)
+                continue;
+
+            if (chasable.ChasingTransform == null)
                 continue;
 
             Vector2 targetPos = chasable.ChasingTransform.position;
@@ -113,7 +116,7 @@ public class EnemyWalkBehaviour : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            if (!hit) 
+            if (!hit)
                 continue;
 
             var chasable = hit.GetComponent<IChasable>();

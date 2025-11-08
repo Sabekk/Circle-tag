@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
 
     public void CleanUp()
     {
-
+        IsInitialized = false;
     }
 
     #endregion

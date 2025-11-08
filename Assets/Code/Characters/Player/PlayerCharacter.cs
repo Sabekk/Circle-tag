@@ -44,6 +44,7 @@ public class PlayerCharacter : MonoBehaviour, IChasable
     public void CleanUp()
     {
         CleanUpControllers();
+        IsInitialized = false;
     }
 
     private void InitializeControllers()

@@ -1,3 +1,4 @@
+using Gameplay.Management.Core;
 using UnityEngine;
 
 namespace Gameplay.UI
@@ -11,20 +12,51 @@ namespace Gameplay.UI
         #region PROPERTIES
 
         protected MainMenuWindow MenuWindow { get; set; }
-        
+        private GameplayCoreManager GameplayCoreManager => GameplayCoreManager.Instance;
+
         #endregion
 
         #region METHODS
 
-        public override void Initialize(UIWindowBase window)
+        public override void InitializeWindow(UIWindowBase window)
         {
-            base.Initialize(window);
+            base.InitializeWindow(window);
 
             if(window is MainMenuWindow menuWindow)
-            {
                 MenuWindow = menuWindow;
-            }
         }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            CheckButtonsByGameState();
+        }
+
+        protected override void AttachEvents()
+        {
+            base.AttachEvents();
+            GameplayCoreManager.OnGameStateChanged += HandleGameStateChenged;
+        }
+
+        protected override void DetachEvents()
+        {
+            base.DetachEvents();
+            GameplayCoreManager.OnGameStateChanged -= HandleGameStateChenged;
+        }
+
+        private void CheckButtonsByGameState()
+        {
+            _closeButton?.gameObject.SetActive(GameplayCoreManager.GameState != GameStateType.MAIN_MENU);
+        }
+
+        #region HANDLERS
+
+        private void HandleGameStateChenged(GameStateType gameState)
+        {
+            CheckButtonsByGameState();
+        }
+
+        #endregion
 
         #region UI_ACTIONS
 

@@ -1,3 +1,5 @@
+using Gameplay.Management.Core;
+
 namespace Gameplay.Management.Inputs
 {
     public class InputManager : GameplayManager<InputManager>
@@ -23,6 +25,7 @@ namespace Gameplay.Management.Inputs
             }
         }
 
+        private GameplayCoreManager GameplayCoreManager => GameplayCoreManager.Instance;
 
         #endregion
 
@@ -51,18 +54,50 @@ namespace Gameplay.Management.Inputs
 
         protected override void AttachEvents()
         {
+            if (GameplayCoreManager)
+            {
+                GameplayCoreManager.OnGameStateChanged += HandleGameStateChanged;
+            }
         }
 
         protected override void DetachEvents()
         {
 
+            if (GameplayCoreManager)
+            {
+                GameplayCoreManager.OnGameStateChanged -= HandleGameStateChanged;
+            }
         }
 
         private void RefreshInputs()
         {
-            CharacterInputs.Enable();
-            HotkeysInputs.Enable();
+            switch (GameplayCoreManager.GameState)
+            {
+                case GameStateType.MAIN_MENU:
+                    CharacterInputs.Disable();
+                    HotkeysInputs.Disable();
+                    break;
+                case GameStateType.GAMEPLAY:
+                    CharacterInputs.Enable();
+                    HotkeysInputs.Enable();
+                    break;
+                case GameStateType.PAUSE:
+                    CharacterInputs.Disable();
+                    HotkeysInputs.Enable();
+                    break;
+                default:
+                    break;
+            }
         }
+
+        #region HANDLERS
+
+        private void HandleGameStateChanged(GameStateType gameState)
+        {
+            RefreshInputs();
+        }
+
+        #endregion
 
         #endregion
     }

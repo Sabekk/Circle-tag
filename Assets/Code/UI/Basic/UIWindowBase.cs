@@ -35,27 +35,55 @@ namespace Gameplay.UI
 
         #region METHODS
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             ToggleView(_defaultView, true);
+            DetachEvents();
+            AttachEvents();
+        }
+
+        public void Close()
+        {
+            Manager.CloseWindow(this);
         }
 
         public void CleanUp()
         {
+            DisableAllViews();
             _viewsHierarchy.Clear();
+
+            DetachEvents();
         }
 
-        public void ToggleView(UIViewBase view, bool state)
+        public void ToggleView(UIViewBase view, bool state, bool checkLast = true)
         {
             DisableAllViews();
             view.gameObject.SetActive(state);
 
             if (state)
-                _viewsHierarchy.Add(view);
-            else
+            {
+                view.Initialize();
                 _viewsHierarchy.Remove(view);
+                _viewsHierarchy.Add(view);
+            }
+            else
+            {
+                view.CleanUp();
+                _viewsHierarchy.Remove(view);
+            }
 
-            CloseOrShowLastView();
+            if (checkLast)
+                CloseOrShowLastView();
+        }
+
+        protected virtual void AttachEvents()
+        {
+
+        }
+
+        protected virtual void DetachEvents()
+        {
+
         }
 
         private void InitializeViews()
@@ -64,7 +92,7 @@ namespace Gameplay.UI
 
             for (int i = 0; i < _views.Count; i++)
             {
-                _views[i].Initialize(this);
+                _views[i].InitializeWindow(this);
                 _views[i].gameObject.SetActive(false);
             }
         }
@@ -73,6 +101,7 @@ namespace Gameplay.UI
         {
             for (int i = 0; i < _views.Count; i++)
             {
+                _views[i].CleanUp();
                 _views[i].gameObject.SetActive(false);
             }
         }
@@ -80,9 +109,12 @@ namespace Gameplay.UI
         private void CloseOrShowLastView()
         {
             if (_viewsHierarchy.Count == 0)
-                Manager.CloseWindow(this);
+                Close();
             else
-                _viewsHierarchy[_viewsHierarchy.Count - 1].gameObject.SetActive(true);
+            {
+                var view = _viewsHierarchy[_viewsHierarchy.Count - 1];
+                ToggleView(view, true, false);
+            }
         }
 
         #endregion

@@ -55,6 +55,19 @@ namespace Gameplay.Management.Enemies
             return newEnemey;
         }
 
+        public void CleanUpEnemies()
+        {
+            for (int i = _enemies.Count - 1; i >= 0; i--)
+            {
+                _enemies[i].CleanUp();
+                Destroy(_enemies[i].gameObject);
+
+                _enemies.RemoveAt(i);
+            }
+
+            _enemies.Clear();
+        }
+
         #endregion
     }
 }
