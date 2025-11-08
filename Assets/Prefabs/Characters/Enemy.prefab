@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9198351995170143373}
   - component: {fileID: 7669681934886236256}
+  - component: {fileID: 8828605327858234283}
   - component: {fileID: 4799852590853072650}
   - component: {fileID: 5182144647300700532}
   m_Layer: 0
@@ -47,6 +48,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _circleCollider: {fileID: 5182144647300700532}
+  _walkBehaviour: {fileID: 8828605327858234283}
+--- !u!114 &8828605327858234283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372986456805677673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34405dc63d1fae41b5c33b87921237b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWalkBehaviour
+  walkSpeed: 2
+  runSpeed: 2
+  turnSpeed: 5
+  directionChangeTime: 2
+  detectionRadius: 3
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &4799852590853072650
 SpriteRenderer:
   m_ObjectHideFlags: 0
