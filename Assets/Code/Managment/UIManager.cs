@@ -2,7 +2,7 @@ using Gameplay.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Management
+namespace Gameplay.Management.UI
 {
     public class UIManager : GameplayManager<UIManager>
     {

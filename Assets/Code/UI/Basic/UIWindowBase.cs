@@ -1,4 +1,4 @@
-using Gameplay.Management;
+using Gameplay.Management.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
