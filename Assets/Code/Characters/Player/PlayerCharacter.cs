@@ -32,6 +32,19 @@ public class PlayerCharacter : MonoBehaviour, IChasable
 
     #endregion
 
+    #region UNITY_METHODS
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<ICatchable>(out var catchable))
+        {
+            TryCatch(catchable);
+        }
+    }
+
+
+    #endregion
+
     #region METHODS
 
     public void Initialzie()
@@ -66,6 +79,14 @@ public class PlayerCharacter : MonoBehaviour, IChasable
 
         _controllers.Add(_movementController);
 
+    }
+
+    public void TryCatch(ICatchable catchable)
+    {
+        if (catchable.IsCatched)
+            return;
+
+        catchable.OnChatched();
     }
 
     #endregion

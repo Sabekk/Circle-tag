@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   _circleCollider: {fileID: 5182144647300700532}
   _walkBehaviour: {fileID: 8828605327858234283}
+  _characterIcon: {fileID: 4799852590853072650}
+  _defaultColor: {r: 1, g: 0, b: 0, a: 1}
+  _catchedColor: {r: 0.4528302, g: 0, b: 0, a: 0.6313726}
 --- !u!114 &8828605327858234283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +160,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

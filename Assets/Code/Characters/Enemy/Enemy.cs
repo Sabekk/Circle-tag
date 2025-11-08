@@ -1,11 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, ICatchable
 {
     #region VARIABLES
 
     [SerializeField] private CircleCollider2D _circleCollider;
     [SerializeField] private EnemyWalkBehaviour _walkBehaviour;
+
+    [SerializeField] private SpriteRenderer _characterIcon;
+    [SerializeField] private Color _defaultColor;
+    [SerializeField] private Color _catchedColor;
 
     private float _currentTime;
 
@@ -44,6 +49,7 @@ public class Enemy : MonoBehaviour
 
     public void Initialize()
     {
+        _characterIcon.color = _defaultColor;
         IsCatched = false;
         _walkBehaviour.Initialize(this);
         IsInitialized = true;
@@ -52,6 +58,12 @@ public class Enemy : MonoBehaviour
     public void CleanUp()
     {
         IsInitialized = false;
+    }
+
+    public void OnChatched()
+    {
+        IsCatched = true;
+        _characterIcon.color = _catchedColor;
     }
 
     #endregion
