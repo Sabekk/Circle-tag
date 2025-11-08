@@ -5,11 +5,11 @@ namespace Gameplay.Management
     public abstract class GameplayManager<T> : MonoSingleton<T>, IGameplayManager where T : MonoBehaviour
     {
         public bool Initialized { get; protected set; }
-        public virtual void Initialzie() { Initialized = true; }
+        public virtual void Initialize() { Initialized = true; }
         /// <summary>
         /// Late initialization with attaching events
         /// </summary>
-        public virtual void LateInitialzie()
+        public virtual void LateInitialize()
         {
             AttachEvents();
         }

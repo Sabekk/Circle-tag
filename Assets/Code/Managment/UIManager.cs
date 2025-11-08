@@ -20,9 +20,9 @@ namespace Gameplay.Management.UI
 
         #region METHODS
 
-        public override void Initialzie()
+        public override void Initialize()
         {
-            base.Initialzie();
+            base.Initialize();
             _windows = new List<UIWindowBase>();
 
             OpenWindow(_mainMenu);

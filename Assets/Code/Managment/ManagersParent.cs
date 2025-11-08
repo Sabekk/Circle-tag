@@ -52,13 +52,13 @@ namespace Gameplay.Management
             managers.AddRange(GetComponentsInChildren<IGameplayManager>());
 
             for (int i = 0; i < managers.Count; i++)
-                managers[i].Initialzie();
+                managers[i].Initialize();
         }
 
         public void LateInitializeManagers()
         {
             for (int i = 0; i < managers.Count; i++)
-                managers[i].LateInitialzie();
+                managers[i].LateInitialize();
         }
 
         public void CleanUpManagers()

@@ -1,6 +1,6 @@
 public interface IGameplayManager
 {
-    public void Initialzie();
-    public void LateInitialzie();
+    public void Initialize();
+    public void LateInitialize();
     public void CleanUp();
 }
